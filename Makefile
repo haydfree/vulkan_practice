@@ -1,15 +1,17 @@
 TARGET   	:= vulkan
 
 CMP      	:= clang
-CINCS	 	:= -I.
-LINCS    	:= -I.
+CINCS	 	:= -I. -I/usr/local/include
+LINCS    	:= -I. -L/usr/local/lib -lvulkan
 DBFLAGS  	:= -g3 -O0 -DTESTING
-STFLAGS   	:= -ansi -Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Wuninitialized -Wformat -Wimplicit-fallthrough -Wundef -Wmisleading-indentation -Wnull-dereference -Wduplicate-decl-specifier -Wredundant-decls 
+STFLAGS   	:= -std=c99 -Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Wuninitialized -Wformat -Wimplicit-fallthrough -Wundef -Wmisleading-indentation -Wnull-dereference -Wduplicate-decl-specifier -Wredundant-decls 
 CFLAGS   	:= ${CINCS} ${DBFLAGS} ${STFLAGS} 
 LFLAGS   	:= ${LINCS} ${DBFLAGS} ${STFLAGS} 
 
 SRCS		:= main.c
 OBJS  		:= ${SRCS:.c=.o}
+
+
 
 ${TARGET}: ${OBJS}
 	@${CMP} ${OBJS} ${LFLAGS} -o ${TARGET}
